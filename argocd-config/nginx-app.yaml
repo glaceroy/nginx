@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-deploy
+  name: nginx
   namespace: openshift-gitops
   labels:
-    app-type: nginx-deploy
+    app-type: nginx
 spec:
   destination:
     namespace: lbg-ocp-engineering-100-lab
