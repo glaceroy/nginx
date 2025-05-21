@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ include "nginx.fullname" . }}-vs
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "nginx.labels" . | nindent 4 }}
+spec:
+  hosts:
+  - {{ .Values.hostname }}
+  gateways:
+  - {{ include "nginx.fullname" . }}-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: {{ .Values.service.port }}
+        host: {{ include "nginx.fullname" . }}
